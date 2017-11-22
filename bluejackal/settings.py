@@ -47,6 +47,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'user_sessions.middleware.SessionMiddleware',
     # 'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'x_forwarded_for.middleware.XForwardedForMiddleware', # uncomment to use when behind proxy
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django_otp.middleware.OTPMiddleware',
