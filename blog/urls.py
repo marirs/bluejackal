@@ -10,6 +10,9 @@ from django.conf.urls import url
 from blog.views import PostSearchView, ContactView
 from views import PostDetailView, PostListView
 from django.contrib.auth.views import logout
+from django.conf.urls.static import static
+
+from bluejackal import settings
 
 urlpatterns = [
     url(r'^search/?$', PostSearchView.as_view(), name='search_view'),
@@ -18,3 +21,6 @@ urlpatterns = [
     url(r'^$', PostListView.as_view(), name='post_list'),
     url(r'^account/logout/$',view=logout,name='tf_logout'),
 ]
+
+if settings.DEBUG is True:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
