@@ -7,7 +7,7 @@ This file is part of Blue Jackal Django CMS System.
 See the file 'LICENSE' for copying permission.
 """
 from haystack import indexes
-from .models import Post
+from .models.app import Post
 
 
 class PostIndex(indexes.SearchIndex, indexes.Indexable):
