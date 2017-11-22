@@ -12,6 +12,8 @@ SITE_ID = 1
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6x)t-kv^#r(#huz8584ohl8lwdp+@ak3-ghk^k(t^w#bbo$+^)'
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+
 POSTS_PER_PAGE = 3
 
 # SECURITY WARNING: don't run with debug turned on in production!
