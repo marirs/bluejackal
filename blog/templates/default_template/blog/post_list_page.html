@@ -1,0 +1,28 @@
+{% load el_pagination_tags %}
+
+{% paginate object_list %}
+{% for object in object_list %}
+  <div>
+    <h1><a href="{{ object.detail_url }}">{{ object.title }}</a></h1>
+    <p class="lead">
+      by
+      <a href="#">{{ object.author.email }}</a>
+    </p>
+    <p>{{ object.body|striptags|truncatechars:100 }}...</p>
+    <div>
+        <span class="badge badge-success">Posted on {{ object.created }}</span>
+    </div>
+    <div>Tags:
+        {% for tag in object.tags.all %}
+          <a href="/?tag={{ tag.name }}"><span class="badge badge-success">{{ tag.name }}</span></a>
+        {% endfor %}
+    </div>
+    <div>Categories:
+        {% for category in object.categories.all %}
+          <a href="/?category={{ category.name }}"><span class="badge badge-success">{{ category.name }}</span></a>
+        {% endfor %}
+    </div>
+    <hr>
+  </div>
+{% endfor %}
+{% show_more %}

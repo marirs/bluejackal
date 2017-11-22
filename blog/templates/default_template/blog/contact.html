@@ -1,0 +1,96 @@
+{% extends template_dir|add:'/base.html' %}
+{% block headtitle %}{{  site_title|add:" | Contact us"  }} {% endblock %}
+{% block container %}
+  <section class="section-common-space">
+    <div class="container">
+      <div class="section-header section-header-v2">
+        <h2 class="section-title">Tell Us What You Think...</h2>
+      </div>
+
+      <div id="contact_form" class="row">
+        <div class="col-md-9 post-info-v2">
+          <h4>We appreciate any feedback about your overall experience on our site or how to make it even better. Please
+            fill
+            in the below form with any comments and we will get back to you.</h4>
+          <hr>
+          <form action="." method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <!--<input class="input-field" type="text" name="name" id="id_name" required/> -->
+              <label class="input-label" for="name">
+                <span class="input-label-content">Your Name</span>
+              </label>
+              {{ form.name }}
+              <span class="help-block with-errors">
+                  {{ form.name.errors }}
+                </span>
+            </div>
+            <div class="form-group">
+
+              <!--<input class="input-field" type="text" name="company" id="id_company" required/>-->
+              <label class="input-label" for="id_company">
+                <span class="input-label-content">Company</span>
+              </label>
+              {{ form.company }}
+              <span class="help-block with-errors">
+                  {{ form.company.errors }}
+                </span>
+            </div>
+            <div class="form-group">
+
+              <!--<input class="input-field" type="text" name="website" id="id_website" required/>-->
+              <label class="input-label" for="id_website">
+                <span class="input-label-content">Website</span>
+              </label>
+              {{ form.website }}
+              <span class="help-block with-errors">
+                  {{ form.website.errors }}
+                </span>
+            </div>
+
+            <div class="form-group">
+
+              <!--<input class="input-field" type="text" name="email" id="id_email" required/> -->
+              <label class="input-label" for="id_email">
+                <span class="input-label-content">Email</span>
+              </label>
+              {{ form.email }}
+              <span class="help-block with-errors">
+                  {{ form.email.errors }}
+                </span>
+            </div>
+
+            <div class="form-group">
+              <!--<textarea rows="10" cols="40" maxlength="400" class="input-field" id="id_message" name="message" required></textarea>-->
+              <label class="input-label" for="message">
+                <span class="input-label-content">Message</span>
+              </label>
+
+              {{ form.message }}
+              <span class="help-block with-errors">
+                  {{ form.message.errors }}
+                </span>
+            </div>
+
+            <div class="form-group">
+              <label class="input-label" for="{{ form.captcha.id_for_label }}">
+                <span class="input-label-content">Captcha</span>
+              </label>
+              {{ form.captcha }}
+              <span class="clearfix"></span>
+              <span class="help-block with-errors">
+                  {{ form.captcha.errors }}
+                </span>
+            </div>
+
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+{% endblock container %}

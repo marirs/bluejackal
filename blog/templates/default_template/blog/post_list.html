@@ -1,0 +1,39 @@
+{% extends template_dir|add:'/base.html' %}
+{% load static %}
+
+{% block container %}
+  <div class="col-md-9">
+    {%  include page_template %}
+  </div>
+  <div class="col-md-3">
+  <ul class="list-group">
+    <li class="list-group-item"><h5>Tags</h5></li>
+    {% for tag in tags %}
+      <li class="list-group-item">
+        <a href="/?tag={{ tag.name }}">{{ tag.name }} <span class="badge badge-success pull-right">{{ tag.posts.all|length }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item"><h5>Categories</h5></li>
+    {% for category in categories %}
+      <li class="list-group-item">
+      <a href="/?category={{ category.name }}">{{ category.name }} <span class="badge badge-success pull-right">{{ category.posts.all|length }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
+  <ul class="list-group">
+    <li class="list-group-item"><h5>Authors</h5></li>
+    {% for author in authors %}
+      <li class="list-group-item">
+      <a href="/?author={{ author.email }}">{{ author.email }}<span class="badge badge-success pull-right">{{ author.posts.all|length }}</span></a>
+      </li>
+    {% endfor %}
+  </ul>
+  </div>
+{% endblock container %}
+{% block extra_js %}
+  <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+  <script>$.endlessPaginate({paginateOnScroll: true});</script>
+{% endblock extra_js %}
+

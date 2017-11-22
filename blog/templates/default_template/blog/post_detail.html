@@ -1,0 +1,52 @@
+{% extends template_dir|add:'/base.html' %}
+{% block metacontent %}{{ object.body|striptags|truncatechars:50 }}{% endblock %}
+{% block metaauthor %}{{ object.author.first_name|default:object.author }}{% endblock %}
+{% block metakeywords %}{{ object.tags.all|join:", " }}{% endblock %}
+{% block headtitle %}{{  site_title|add:" | "|add:object.title  }} {% endblock %}
+
+{% block container %}
+  <div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-12">
+
+      <!-- Title -->
+      <h1 class="mt-4">{{ object.title }}</h1>
+
+      <!-- Author -->
+      <p class="lead">
+        by
+        <a href="#">{{ object.author.email }}</a>
+        <span class="pull-right">
+          Category:
+        {% for category in object.categories.all %}
+          <span class="badge badge-success">{{ category.name }}</span>
+        {% endfor %}
+        </span>
+      </p>
+
+      <hr>
+
+      <!-- Date/Time -->
+      <p>
+        Posted on {{ object.created }}
+        <span class="pull-right">
+          Tags:
+        {% for tag in object.tags.all %}
+          <span class="badge badge-success">{{ tag.name }}</span>
+        {% endfor %}
+        </span>
+      </p>
+
+      <hr>
+
+
+      <!-- Post Content -->
+      <p class="lead">{{ object.body|safe }}</p>
+
+      <hr>
+
+    </div>
+
+  </div>
+{% endblock container %}
