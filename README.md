@@ -6,6 +6,7 @@ A Django Light-weight CMS. It is used for Blog, Web, Apps, etc.
 - 2 factor Auth
 - Infinite Scroll
 - Custom Templates
+- reCaptcha2
 
 ### Requirements
 
