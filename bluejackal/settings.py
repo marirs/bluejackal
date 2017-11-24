@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'snowpenguin.django.recaptcha2',
     'activelink',
     'ckeditor',
     'el_pagination',
@@ -137,7 +138,7 @@ CKEDITOR_CONFIGS = {
 
 EL_PAGINATION_PER_PAGE = POSTS_PER_PAGE
 EL_PAGINATION_PAGE_LABEL = 'next'
-EL_PAGINATION_LOADING = 'getting more posts'
+EL_PAGINATION_LOADING = """<img src="/static/vendor/loader.gif" alt="loading" width="16px" /> getting more posts!"""
 
 HAYSTACK_CONNECTIONS = {
     'default': {

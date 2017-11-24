@@ -12,6 +12,9 @@ from captcha.fields import CaptchaField
 from django.core.mail import send_mail
 from django.conf import settings
 
+from snowpenguin.django.recaptcha2.fields import ReCaptchaField
+from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
+
 import os
 
 class ContactForm(forms.Form):
@@ -22,8 +25,8 @@ class ContactForm(forms.Form):
     website = forms.CharField(max_length=50, required=False)
     email = forms.EmailField(required=True)
     message = forms.CharField(widget=forms.Textarea, max_length=400, required=True, min_length=10)
-    captcha = CaptchaField(required=True)
-
+    #captcha = CaptchaField(required=True)
+    captcha = ReCaptchaField(widget=ReCaptchaWidget())
 
     def __init__(self, *args, **kwargs):
         super(ContactForm, self).__init__(*args, **kwargs)

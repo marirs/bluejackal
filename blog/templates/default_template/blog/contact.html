@@ -1,5 +1,9 @@
 {% extends template_dir|add:'/base.html' %}
+{% load recaptcha2 %}
+
 {% block headtitle %}{{  site_title|add:" | Contact us"  }} {% endblock %}
+{% block reCaptcha2 %}{% recaptcha_init 'en' %}{% endblock reCaptcha2 %}
+
 {% block container %}
   <section class="section-common-space">
     <div class="container">
