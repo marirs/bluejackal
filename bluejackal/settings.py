@@ -186,3 +186,9 @@ GEOIP_PATH = os.path.join(BASE_DIR, 'database/geoip2/')
 
 # Import local settings.
 execfile(os.path.join(os.path.dirname(os.path.realpath(__file__)), "user_settings.py"), globals(), locals())
+
+
+# FEED SETTINGS
+FEED_TITLE = 'Blog powered by BlueJackal'
+FEED_DESC_MAX_LENGTH = 70
+FEED_NUM_ITEMS = 5

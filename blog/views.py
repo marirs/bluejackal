@@ -8,14 +8,18 @@ See the file 'LICENSE' for copying permission.
 """
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.contrib.auth.models import User
 
 # Create your views here.
+from django.utils.html import strip_tags
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView
 from el_pagination.settings import PAGE_LABEL
 from el_pagination.views import AjaxListView
 from haystack.generic_views import SearchView
+from django.contrib.syndication.views import Feed
+from django.urls import reverse
 
 from blog.forms import ContactForm
 from blog.models.app import Post, Tag, Category, TemplateDir
@@ -83,3 +87,33 @@ class ContactView(FormView):
         # It should return an HttpResponse.
         form.send_email()
         return super(ContactView, self).form_valid(form)
+
+
+class LatestPostsFeed(Feed):
+    title = settings.FEED_TITLE
+    link = "/feeds/"
+
+    def items(self):
+        return Post.objects.order_by('-created')[:settings.FEED_NUM_ITEMS]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_link(self, item):
+        return reverse('post_detail', args=[item.slug])
+
+    def item_description(self, item):
+        body = strip_tags(item.body)
+        return body[:settings.FEED_DESC_MAX_LENGTH] + '...' if len(body) > settings.FEED_DESC_MAX_LENGTH else body
+
+    def item_author_name(self, item):
+        return item.author.get_full_name()
+
+    def item_author_email(self, item):
+        return item.author.email
+
+    def item_categories(self, item):
+        return item.categories.values_list('name', flat=True)
+
+    def item_pubdate(self, item):
+        return item.created
