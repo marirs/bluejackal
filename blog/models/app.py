@@ -68,11 +68,12 @@ class Post(models.Model):
     def detail_url(self):
         return reverse('post_detail', kwargs={'slug':self.slug})
 
-    def save(self, *args, **kwargs):
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
         slug = self.title.lower() if not self.slug else self.slug.lower()
         slug = slug.translate({ord(c): "" for c in self.specialChars})
         self.slug =slug.replace(' ', '-')
-        super(Post, self).save(*args, **kwargs)
+        super(Post, self).save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
         return self.title
