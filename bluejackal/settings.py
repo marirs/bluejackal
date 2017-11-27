@@ -185,7 +185,6 @@ TWO_FACTOR_PATCH_ADMIN = True
 GEOIP_PATH = os.path.join(BASE_DIR, 'database/geoip2/')
 
 # Feed Settings
-FEED_TITLE = 'Blog powered by BlueJackal'
 FEED_DESC_MAX_LENGTH = 70
 FEED_NUM_ITEMS = 5
 

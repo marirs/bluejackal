@@ -9,8 +9,8 @@ See the file 'LICENSE' for copying permission.
 from __future__ import unicode_literals
 
 from django.conf import settings
-from django.contrib.auth.models import User
-
+from django.contrib.syndication.views import Feed
+from django.urls import reverse
 # Create your views here.
 from django.utils.html import strip_tags
 from django.views.generic.detail import DetailView
@@ -18,11 +18,10 @@ from django.views.generic.edit import FormView
 from el_pagination.settings import PAGE_LABEL
 from el_pagination.views import AjaxListView
 from haystack.generic_views import SearchView
-from django.contrib.syndication.views import Feed
-from django.urls import reverse
 
 from blog.forms import ContactForm
-from blog.models.app import Post, Tag, Category, TemplateDir
+from blog.models.app import Post, TemplateDir
+from blog.models.website import SiteTitle
 
 
 class PostListView(AjaxListView):
@@ -90,8 +89,12 @@ class ContactView(FormView):
 
 
 class LatestPostsFeed(Feed):
-    title = settings.FEED_TITLE
     link = "/feeds/"
+
+    try:
+        title = SiteTitle.objects.first().name
+    except AttributeError:
+        title = 'Blog powered by BlueJackal'
 
     def items(self):
         return Post.objects.order_by('-created')[:settings.FEED_NUM_ITEMS]
